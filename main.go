@@ -7,6 +7,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/jeypac/go-jwt-mux/controllers/authcontroller"
 	"github.com/jeypac/go-jwt-mux/controllers/productcontroller"
+	"github.com/jeypac/go-jwt-mux/middlewares"
 	"github.com/jeypac/go-jwt-mux/models"
 )
 
@@ -20,7 +21,7 @@ func main() {
 
 	api := r.PathPrefix("/home").Subrouter()
 	api.HandleFunc("/products", productcontroller.Index).Methods("GET")
-	api.Use()
+	api.Use(middlewares.JWTMiddleware)
 
 	log.Fatal(http.ListenAndServe(":6000", r))
 }

@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/golang-jwt/jwt/v5"
+	"github.com/golang-jwt/jwt/v4"
 	"github.com/jeypac/go-jwt-mux/config"
 	"github.com/jeypac/go-jwt-mux/helper"
 	"github.com/jeypac/go-jwt-mux/models"
@@ -47,7 +47,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// GENERATE JWT TOKEN
-	expTime := time.Now().Add(time.Minute * 1)
+	expTime := time.Now().Add(time.Minute * 15) // SET TIME EXPIRED TOKEN
 	claims := &config.JWTClaim{
 		Username: user.Username,
 		RegisteredClaims: jwt.RegisteredClaims{
